@@ -1,0 +1,84 @@
+{
+	"name": "Radius Dev Container",
+	"image": "mcr.microsoft.com/devcontainers/universal:linux",
+	"onCreateCommand": "bash ./.devcontainer/on-create.sh",
+	"postCreateCommand":  "echo 'Dev container built – waiting for VS Code to attach…'",
+	"postStartCommand":   "bash -ic 'scripts/wi-kind-setup.sh'",
+
+	"runArgs": [
+		"--env-file=./.devcontainer/wi.env",
+		"--env-file=./.devcontainer/devcontainer.env"
+	],
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker": {},
+		"ghcr.io/devcontainers/features/azure-cli:1": {},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"version": "latest",
+			"helm": "latest",
+			"minikube": "none"
+		},
+		"ghcr.io/devcontainers-extra/features/kind": {},
+		"ghcr.io/devcontainers-extra/features/apt-packages": {
+			"packages": "curl,iputils-ping"
+		},
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers/features/github-cli": {},
+		"ghcr.io/devcontainers/features/go:1": {
+			"version": "latest",
+			"golangciLintVersion": "latest"
+		},
+		"ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
+		"ghcr.io/stuartleeks/dev-container-features/azure-cli-persistence:0": {},
+		"ghcr.io/devcontainer-community/devcontainer-features/smallstep.com:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"ms-azuretools.vscode-dapr",
+				"ms-dotnettools.csharp",
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"dunn.redis",
+				"GitHub.copilot",
+				"ms-azuretools.vscode-bicep",
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"mikeedjones.copy-file-to-chat",
+				"ms-azuretools.vscode-azure-github-copilot",
+				"ms-azuretools.vscode-azurestorage",
+				"ms-kubernetes-tools.vscode-aks-tools"
+			]
+		}
+	},
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
+	"mounts": [
+		{
+			"source": "/var/run/docker.sock",
+			"target": "/var/run/docker.sock",
+			"type": "bind"
+		},
+		{
+			"source": "profile",
+			"target": "/root",
+			"type": "volume"
+		},
+		{
+			"target": "/root/.vscode-server",
+			"type": "volume"
+		}
+	],
+	"portsAttributes": {
+		"3000": {
+			"label": "demo-app",
+			"onAutoForward": "openBrowser",
+			"protocol": "http"
+		},
+		"8081": {
+			"label": "k3s",
+			"onAutoForward": "silent"
+		}
+	},
+	"remoteUser": "root"
+}
