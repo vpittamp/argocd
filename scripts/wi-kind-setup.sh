@@ -459,6 +459,13 @@ apply_deployments() {                         # <── NEW
   shopt -u nullglob
 }
 
+install_argocd() {
+  log "📦  Installing ArgoCD"
+  kubectl create namespace argocd
+  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  kubectl port-forward svc/argocd-server -n argocd 8080:443
+}
+
 ###############################################################################
 # 8. Execution order
 ###############################################################################
@@ -478,6 +485,7 @@ install_external_secrets_operator
 create_eso_service_account
 
 # ▶ Apply every manifest in /workspaces/samples/deployments
-apply_deployments  
+apply_deployments
+install_argocd  
 
 log "🎉  wi-kind-setup complete – cluster ‘$KIND_CLUSTER_NAME’, storage ‘$AZURE_STORAGE_ACCOUNT’, Key Vault ‘$KEYVAULT_NAME’"

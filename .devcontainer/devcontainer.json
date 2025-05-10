@@ -29,7 +29,8 @@
 		},
 		"ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
 		"ghcr.io/stuartleeks/dev-container-features/azure-cli-persistence:0": {},
-		"ghcr.io/devcontainer-community/devcontainer-features/smallstep.com:1": {}
+		"ghcr.io/devcontainer-community/devcontainer-features/smallstep.com:1": {},
+		"ghcr.io/devcontainers-extra/features/argo-cd": {}
 	},
 	"customizations": {
 		"vscode": {

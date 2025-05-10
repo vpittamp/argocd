@@ -29,6 +29,7 @@ cat <<EOF > params-applications-rp.json
 }
 EOF
 az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-applications-rp.json
+rm -f "params-applications-rp.json"
 
 # Create the bicep-de federated credential for the application
 cat <<EOF > params-bicep-de.json
@@ -43,6 +44,7 @@ cat <<EOF > params-bicep-de.json
 }
 EOF
 az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-bicep-de.json
+rm -f "params-bicep-de.json"
 
 # Create the ucp federated credential for the application
 cat <<EOF > params-ucp.json
@@ -57,6 +59,7 @@ cat <<EOF > params-ucp.json
 }
 EOF
 az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-ucp.json
+rm -f "params-ucp.json"
 
 cat <<EOF > params-eso.json
 {
@@ -70,7 +73,7 @@ cat <<EOF > params-eso.json
 }
 EOF
 az ad app federated-credential create --id "${APPLICATION_OBJECT_ID}" --parameters @params-ucp.json
-
+rm -f "params-eso.json"
 
 # Set the permissions for the application
 az ad sp create --id ${APPLICATION_CLIENT_ID}

@@ -19,10 +19,6 @@ az extension add --name aks-preview --only-show-errors >/dev/null 2>&1 || true
 curl -fsSL https://github.com/ducaale/xh/releases/download/v0.17.0/xh-v0.17.0-x86_64-unknown-linux-musl.tar.gz \
     | tar -xz -C /usr/local/bin --strip-components=1
 
-# curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-# sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
-# rm argocd-linux-amd64
-
 # kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
 # kubectl port-forward svc/argocd-server -n argocd 8080:443
 
